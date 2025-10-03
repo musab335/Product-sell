@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Order Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+        
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+        
+        .product-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .product-name {
+            flex: 2;
+        }
+        
+        .product-quantity {
+            flex: 1;
+        }
+        
+        .add-product {
+            background-color: #f5f5f5;
+            color: #4CAF50;
+            border: 1px dashed #4CAF50;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .add-product:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .remove-product {
+            background-color: #ffebee;
+            color: #f44336;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .btn-submit:hover {
+            background: linear-gradient(to right, #45a049, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .confirmation i {
+            font-size: 60px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .confirmation h2 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 600px) {
+            .product-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .container {
+                margin: 10px auto;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shopping-cart"></i> Product Order Form</h1>
+            <p>Apni saari details bharein aur order confirm karein</p>
+        </header>
+        
+        <div class="form-container">
+            <form id="orderForm">
+                <div class="form-section">
+                    <h2><i class="fas fa-user"></i> Personal Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Apna poora naam likhein" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Apna mobile number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Apna email address">
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2><i class="fas fa-map-marker-alt"></i> Delivery Address</h2>
+                    
+                    <div class="form-group">
+                        <label for="address">Full Address</label>
+                        <textarea id="address" name="address" rows="3" placeholder="Apna poora address likhein" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Shahar ka naam" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" placeholder="State ka naam" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pincode">PIN Code</label>
+                        <input type="text" id="pincode" name="pincode" placeholder="Area ka PIN code" required>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2><i class="fas fa-box"></i> Product Details</h2>
+                    
+                    <div id="products-container">
+                        <div class="product-row">
+                            <div class="form-group product-name">
+                                <label for="product1">Product Name</label>
+                                <input type="text" id="product1" name="product[]" placeholder="Product ka naam" required>
+                            </div>
+                            
+                            <div class="form-group product-quantity">
+                                <label for="quantity1">Quantity</label>
+                                <input type="number" id="quantity1" name="quantity[]" min="1" value="1" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-product" id="add-product-btn">
+                        <i class="fas fa-plus"></i> Aur Product Add Karein
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2><i class="fas fa-comment"></i> Additional Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="notes">Special Instructions (Optional)</label>
+                        <textarea id="notes" name="notes" rows="3" placeholder="Koi special instructions ya note"></textarea>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Order Submit Karein
+                </button>
+            </form>
+            
+            <div class="confirmation" id="confirmation">
+                <i class="fas fa-check-circle"></i>
+                <h2>Thank You! Aapka Order Confirm Ho Gaya Hai</h2>
+                <p>Hum jald hi aapko call karenge order ki confirmation ke liye.</p>
+                <p>Aapka order ID: <strong id="order-id"></strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productsContainer = document.getElementById('products-container');
+            const addProductBtn = document.getElementById('add-product-btn');
+            const orderForm = document.getElementById('orderForm');
+            const confirmation = document.getElementById('confirmation');
+            const orderIdElement = document.getElementById('order-id');
+            
+            let productCount = 1;
+            
+            // Add more products
+            addProductBtn.addEventListener('click', function() {
+                productCount++;
+                const productRow = document.createElement('div');
+                productRow.className = 'product-row';
+                productRow.innerHTML = `
+                    <div class="form-group product-name">
+                        <label for="product${productCount}">Product Name</label>
+                        <input type="text" id="product${productCount}" name="product[]" placeholder="Product ka naam" required>
+                    </div>
+                    
+                    <div class="form-group product-quantity">
+                        <label for="quantity${productCount}">Quantity</label>
+                        <input type="number" id="quantity${productCount}" name="quantity[]" min="1" value="1" required>
+                    </div>
+                    
+                    <button type="button" class="remove-product">Remove</button>
+                `;
+                
+                productsContainer.appendChild(productRow);
+                
+                // Add event listener to remove button
+                productRow.querySelector('.remove-product').addEventListener('click', function() {
+                    productsContainer.removeChild(productRow);
+                });
+            });
+            
+            // Form submission
+            orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Generate a random order ID
+                const orderId = 'ORD' + Math.floor(100000 + Math.random() * 900000);
+                orderIdElement.textContent = orderId;
+                
+                // Collect form data
+                const formData = new FormData(orderForm);
+                const data = {
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    address: formData.get('address'),
+                    city: formData.get('city'),
+                    state: formData.get('state'),
+                    pincode: formData.get('pincode'),
+                    notes: formData.get('notes'),
+                    products: [],
+                    orderId: orderId
+                };
+                
+                // Get products
+                const products = formData.getAll('product[]');
+                const quantities = formData.getAll('quantity[]');
+                
+                for (let i = 0; i < products.length; i++) {
+                    if (products[i].trim() !== '') {
+                        data.products.push({
+                            name: products[i],
+                            quantity: quantities[i]
+                        });
+                    }
+                }
+                
+                // In a real application, you would send this data to your server
+                console.log('Order Data:', data);
+                
+                // Show confirmation
+                orderForm.style.display = 'none';
+                confirmation.style.display = 'block';
+                
+                // Scroll to confirmation
+                confirmation.scrollIntoView({ behavior: 'smooth' });
+                
+                // In a real application, you would send this data to your server
+                // For example using fetch API:
+                /*
+                fetch('/submit-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Success:', result);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+                */
+            });
+        });
+        
+        // Generate a simple order ID
+        function generateOrderId() {
+            return 'ORD' + Date.now();
+        }
+    </script>
+</body>
+</html>
